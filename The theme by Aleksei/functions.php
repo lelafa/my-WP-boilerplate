@@ -1,7 +1,7 @@
 <?php
-include( 'includes/scripts.php' );
-include( 'includes/additional.php' );
-include( 'includes/disable_comments.php' );
+require_once get_template_directory() . '/includes/scripts.php';
+require_once get_template_directory() . '/includes/additional.php';
+require_once get_template_directory() . '/includes/disable_comments.php';
 
 // ACF
 if ( function_exists( 'acf_add_options_sub_page' ) ) {
@@ -48,30 +48,3 @@ function get_menu_items_by_registered_slug( $menu_slug )
 	
 	return $filtered_menu_items;
 }
-
-// Contact Form Submission
-add_action( 'wp_ajax_contact_form_submission', 'contact_form_submission' );
-add_action( 'wp_ajax_nopriv_contact_form_submission', 'contact_form_submission' );
-function contact_form_submission()
-{
-	$name = sanitize_text_field( $_POST[ 'name' ] );
-	$email = sanitize_email( $_POST[ 'email' ] );
-	$project = ( isset( $_POST[ 'project' ] ) && $_POST[ 'project' ] ) ? json_decode( str_replace( '\"', '"', $_POST[ 'project' ] ), true ) : '';
-	$message = ( isset( $_POST[ 'message' ] ) && $_POST[ 'message' ] ) ? sanitize_text_field( $_POST[ 'message' ] ) : '';
-	$url = $_POST[ 'url' ];
-	
-	$to = get_field( 'contact_form_email_to_send_submissions_to', 'options' );
-	
-	if ( !$to ) {
-		$to = 'MAIL@MAIL.COM';
-	}
-	
-	$subject = 'Contact form submission | ' . $email;
-	$message_to_send = 'Name: ' . $name . '<br /><br />Email: ' . $email . '<br /><br />Message: ' . $message . '<br /><br />Project(s): ' . ( ( is_array( $project ) ? implode( ', ', $project ) : $project ) . '<br /><br /><br />URL: ' . $url );
-	$headers = [ 'Content-Type: text/html; charset=UTF-8' ];
-	
-	$success = wp_mail( $to, $subject, $message_to_send, $headers );
-	
-	die();
-}
-
