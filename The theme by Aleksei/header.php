@@ -3,19 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=9;IE=10;IE=Edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
-
-	<link rel="apple-touch-icon" sizes="180x180" href="<?= $temp_dir; ?>/images/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="<?= $temp_dir; ?>/images/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="<?= $temp_dir; ?>/images/favicon/favicon-16x16.png">
-	<link rel="icon" type="image/png" sizes="192x192" href="<?= $temp_dir; ?>/images/favicon/android-chrome-192x192.png">
-	<link rel="manifest" href="<?= $temp_dir; ?>/images/favicon/site.webmanifest">
-	<link rel="mask-icon" href="<?= $temp_dir; ?>/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="msapplication-TileColor" content="#da532c">
-	<meta name="theme-color" content="#ffffff">
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php wp_head(); ?>
 	
 	<title>
 		<?php 
